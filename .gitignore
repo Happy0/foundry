@@ -1,3 +1,11 @@
 **.swp
+
+*.o
+*.so
+*.rlib
+*.dll
+
+*.exe
+
 Cargo.lock
-target
+/target/
