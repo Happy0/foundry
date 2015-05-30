@@ -9,3 +9,6 @@ path = "lib.rs"
 
 [dependencies]
 toml = "*"
+
+[dependencies.cargo]
+git = "https://github.com/rust-lang/cargo"
