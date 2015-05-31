@@ -54,15 +54,9 @@ impl Config {
 
     /// Load the IDE settings from the default location (~/.foundryrc)
     pub fn from_default_path() -> Result<Config, Error> {
-        let home = match env::home_dir() {
-            Some(p) => p,
-            None => return Err(Error::HomeNotFound),
-        };
-
-        let mut file_path = home.join(CONFIG_DIR);
-        file_path = file_path.join(CONFIG_FILE_NAME);
-
-        Config::from_path(file_path)
+        let home = env::home_dir().ok_or(Error::HomeNotFound);
+        let file_path = home.map(|home_path| home_path.join(CONFIG_DIR).join(CONFIG_FILE_NAME));
+        file_path.and_then(|config_path| Config::from_path(config_path))
     }
 
     /// Load the IDE settings from any location.
