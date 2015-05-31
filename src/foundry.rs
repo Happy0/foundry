@@ -1,11 +1,27 @@
-pub struct Foundry {
-    test_text: &'static str,
+use std::thread;
+
+use config::Config;
+use ui::Window;
+
+pub struct Foundry<'a> {
+    window: Window<'a>,
 }
 
-impl Foundry {
-    pub fn new() -> Foundry {
+impl<'a> Foundry<'a> {
+    pub fn new(config: &Config) -> Foundry {
         Foundry {
-            test_text: "I am an ide, i promise!",
+            window: Window::new(config),
+        }
+    }
+
+    pub fn begin(&mut self) {
+        let _ = thread::scoped(move || {
+            self.window.spawn_ui();
+        });
+
+
+        loop {
+            println!("Step foundry!");
         }
     }
 }

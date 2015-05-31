@@ -3,28 +3,19 @@ name = "foundry"
 version = "0.1.0"
 authors = ["currysoup <sam92cutler@hotmail.co.uk>"]
 
+[dependencies.config]
+path = "src/config"
+
 [dependencies.file]
 path = "src/file"
 
-[dependencies.config]
-path = "src/config"
+[dependencies.ui]
+path = "src/ui"
 
 ##########################
 # crates.io dependencies #
 ##########################
 
 [dependencies]
-conrod = "*"
 docopt = "*"
-gapbuffer = "0.1.1"
-gfx = "0.6.*"
-gfx_device_gl = "0.4.*"
-piston = "*"
-piston-viewport = "0.0.3"
-piston_window = "0.0.8"
-piston2d-graphics = "*"
-piston2d-gfx_graphics = "0.1.21"
-piston2d-opengl_graphics = "0.0.17"
-pistoncore-glutin_window = "0.0.9"
 rustc-serialize = "0.3.14"
-time = "*"

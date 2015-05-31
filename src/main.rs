@@ -1,6 +1,11 @@
-extern crate config;
+#![feature(scoped)]
+
 extern crate docopt;
 extern crate rustc_serialize;
+
+extern crate config;
+extern crate file;
+extern crate ui;
 
 use config::Config;
 use foundry::Foundry;
@@ -16,7 +21,7 @@ fn main() {
         None => Config::from_default_path().unwrap(),
     };
 
+    let mut ide = Foundry::new(&config);
 
-    println!("{:?}", config);
-    let mut data = Foundry::new();
+    ide.begin();
 }

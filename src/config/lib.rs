@@ -23,8 +23,8 @@ pub struct Config {
 
 #[derive(Debug, RustcDecodable, RustcEncodable)]
 pub struct Session {
-    // Are we fullscreen?
-    pub fullscreen: bool,
+    // Are we maximized?
+    pub maximized: bool,
     // Dimensions for the window to goto when not fullscreen
     pub width: u32,
     pub height: u32,
@@ -43,7 +43,7 @@ impl Config {
     pub fn default() -> Config {
         Config {
             session: Session {
-                fullscreen: true,
+                maximized: true,
                 width: 800,
                 height: 600,
                 projects: vec![],
