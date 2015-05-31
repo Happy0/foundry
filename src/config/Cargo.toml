@@ -1,0 +1,11 @@
+[package]
+name = "config"
+version = "0.0.1"
+authors = ["currysoup <sam92cutler@hotmail.co.uk>"]
+
+[lib]
+name = "config"
+path = "lib.rs"
+
+[dependencies]
+rustc-serialize = "0.3.14"

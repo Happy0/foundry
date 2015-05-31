@@ -6,14 +6,26 @@ use std::fs::WalkDir;
 use std::io;
 use std::path::Path;
 
+pub struct Project {
+    files : WalkDir,
+}
+
 #[derive(Debug)]
 pub enum Error {
     NoCargoFile,
     Io(io::Error),
 }
 
-pub struct Project {
-    files : WalkDir,
+impl Project {
+    pub fn from_path<P: AsRef<Path>>(path: P) -> Result<Project, Error> {
+        let cargo_path = Path::join(path.as_ref(), "Cargo.toml");
+        if !cargo_path.exists() {
+            return Err(Error::NoCargoFile)
+        }
+
+        let files = walk_dir(path).map_err(|err| Error::Io(err));
+        return files.map(|file_walk| Project { files : file_walk });
+    }
 }
 
 impl fmt::Display for Error {
@@ -40,16 +52,3 @@ impl StdError for Error {
         }
     }
 }
-
-impl Project {
-    pub fn from_path<P: AsRef<Path>>(path: P) -> Result<Project, Error> {
-        let cargo_path = Path::join(path.as_ref(), "Cargo.toml");
-        if !cargo_path.exists() {
-            return Err(Error::NoCargoFile)
-        }
-
-        let files = walk_dir(path).map_err(|err| Error::Io(err));
-        return files.map(|file_walk| Project { files : file_walk });
-    }
-}
-
